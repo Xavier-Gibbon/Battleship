@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using SwinGameSDK;
 /// <summary>
 /// This includes a number of utility methods for
 /// drawing and interacting with the Mouse.
@@ -247,7 +248,7 @@ static class UtilityFunctions
 				break;
 		}
 
-		SwinGame.DrawFramerate(675, 585, GameResources.GameFont("CourierSmall"));
+		SwinGame.DrawFramerate(675, 585);
 	}
 
 	public static void AddExplosion(int row, int col)

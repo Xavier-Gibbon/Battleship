@@ -122,7 +122,7 @@ public static class GameController
 	private static void PlayHitSequence(int row, int column, bool showAnimation)
 	{
 		if (showAnimation) {
-			UtilityFunction.AddExplosion(row, column);
+			UtilityFunctions.AddExplosion(row, column);
 		}
 
 		Audio.PlaySoundEffect(GameResources.GameSound("Hit"));
@@ -347,7 +347,7 @@ public static class GameController
 	public static void AddNewState(GameState state)
 	{
 		_state.Push(state);
-		Message = "";
+		UtilityFunctions.Message = "";
 	}
 
 	/// <summary>
