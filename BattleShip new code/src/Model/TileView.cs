@@ -1,0 +1,97 @@
+<<<<<<< HEAD:CSharp_SwinGame_3_6_XAMARIANSTUDIO/ProjectTemplate/src/Model/TileView.cs
+<<<<<<< HEAD:Converted battleships files/Model/TileView.cs
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+//using System.Data;
+using System.Diagnostics;
+/// <summary>
+/// The values that are visable for a given tile.
+/// </summary>
+public enum TileView
+{
+	/// <summary>
+	/// The viewer can see sea
+	/// </summary>
+	/// <remarks>
+	/// May be masking a ship if viewed via a sea adapter
+	/// </remarks>
+	Sea,
+
+	/// <summary>
+	/// The viewer knows that site was attacked but nothing
+	/// was hit
+	/// </summary>
+	Miss,
+
+	/// <summary>
+	/// The viewer can see a ship at this site
+	/// </summary>
+	Ship,
+
+	/// <summary>
+	/// The viewer knows that the site was attacked and
+	/// something was hit
+	/// </summary>
+	Hit
+}
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================
+=======
+
+using Microsoft.VisualBasic;
+=======
+>>>>>>> 499e71328b5a04fd5a00f38fd0ed57757c3b473e:BattleShip new code/src/Model/TileView.cs
+using System;
+using System.Collections;
+using System.Collections.Generic;
+//using System.Data;
+using System.Diagnostics;
+/// <summary>
+/// The values that are visable for a given tile.
+/// </summary>
+public enum TileView
+{
+	/// <summary>
+	/// The viewer can see sea
+	/// </summary>
+	/// <remarks>
+	/// May be masking a ship if viewed via a sea adapter
+	/// </remarks>
+	Sea,
+
+	/// <summary>
+	/// The viewer knows that site was attacked but nothing
+	/// was hit
+	/// </summary>
+	Miss,
+
+	/// <summary>
+	/// The viewer can see a ship at this site
+	/// </summary>
+	Ship,
+
+	/// <summary>
+	/// The viewer knows that the site was attacked and
+	/// something was hit
+	/// </summary>
+	Hit
+}
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+<<<<<<< HEAD:CSharp_SwinGame_3_6_XAMARIANSTUDIO/ProjectTemplate/src/Model/TileView.cs
+//=======================================================
+>>>>>>> a1413a5bc62ffc971e01296a99f06722d9a08067:CSharp_SwinGame_3_6_XAMARIANSTUDIO/ProjectTemplate/src/Model/TileView.cs
+=======
+//=======================================================
+>>>>>>> 499e71328b5a04fd5a00f38fd0ed57757c3b473e:BattleShip new code/src/Model/TileView.cs
