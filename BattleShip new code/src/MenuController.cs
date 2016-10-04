@@ -26,6 +26,7 @@ static class MenuController
 		new string[] {
 			"PLAY",
 			"SETUP",
+			"MODE",
 			"SCORES",
 			"QUIT"
 		},
@@ -38,6 +39,11 @@ static class MenuController
 			"EASY",
 			"MEDIUM",
 			"HARD"
+		},
+		new string[] {
+			"NORMAL",
+			"TIMED",
+			"HANDICAP"
 		}
 
 	};
@@ -55,9 +61,15 @@ static class MenuController
 	private const int SETUP_MENU = 2;
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
 	private const int MAIN_MENU_SETUP_BUTTON = 1;
-	private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
+	private const int MAIN_MENU_MODE_BUTTON = 2;
+	private const int MAIN_MENU_TOP_SCORES_BUTTON = 3;
 
-	private const int MAIN_MENU_QUIT_BUTTON = 3;
+	private const int MODE_MENU = 3;
+	private const int MODE_MENU_NORMAL_BUTTON = 0;
+	private const int MODE_MENU_TIMED_BUTTON = 1;
+	private const int MODE_MENU_HANDICAPPED_BUTTON = 2;
+
+	private const int MAIN_MENU_QUIT_BUTTON = 4;
 	private const int SETUP_MENU_EASY_BUTTON = 0;
 	private const int SETUP_MENU_MEDIUM_BUTTON = 1;
 	private const int SETUP_MENU_HARD_BUTTON = 2;
@@ -90,6 +102,20 @@ static class MenuController
 			HandleMenuInput(MAIN_MENU, 0, 0);
 		}
 	}
+
+	/// <summary>
+	/// Handles the processing of user input when the mode menu is showing
+	/// </summary>
+	public static void HandleModeMenuInput()
+	{
+		bool handled = false;
+		handled = HandleMenuInput(MODE_MENU, 1, 2);
+
+		if (!handled) {
+			HandleMenuInput(MAIN_MENU, 0, 0);
+		}
+	}
+		
 
 	/// <summary>
 	/// Handle input in the game menu.
@@ -173,6 +199,15 @@ static class MenuController
 	}
 
 	/// <summary>
+	/// Draws the mode menu to the screen
+	/// </summary>
+	public static void DrawMode()
+	{
+		DrawButtons(MAIN_MENU);
+		DrawButtons(MODE_MENU, 1, 2);
+	}
+
+	/// <summary>
 	/// Draw the buttons associated with a top level menu.
 	/// </summary>
 	/// <param name="menu">the index of the menu to draw</param>
@@ -249,6 +284,9 @@ static class MenuController
 			case SETUP_MENU:
 				PerformSetupMenuAction(button);
 				break;
+			case MODE_MENU:
+				PerformModeMenuAction(button);
+				break;
 			case GAME_MENU:
 				PerformGameMenuAction(button);
 				break;
@@ -267,6 +305,9 @@ static class MenuController
 				break;
 			case MAIN_MENU_SETUP_BUTTON:
 				GameController.AddNewState(GameState.AlteringSettings);
+				break;
+			case MAIN_MENU_MODE_BUTTON:
+				GameController.AddNewState(GameState.AlteringMode);
 				break;
 			case MAIN_MENU_TOP_SCORES_BUTTON:
 				GameController.AddNewState(GameState.ViewingHighScores);
@@ -295,6 +336,23 @@ static class MenuController
 				break;
 		}
 		//Always end state - handles exit button as well
+		GameController.EndCurrentState();
+	}
+
+	private static void PerformModeMenuAction(int button)
+	{
+		switch (button) {
+			case MODE_MENU_NORMAL_BUTTON:
+				GameController.SetMode(Mode.Normal);
+				break;
+			case MODE_MENU_TIMED_BUTTON:
+				GameController.SetMode(Mode.Timed);
+				break;
+			case MODE_MENU_HANDICAPPED_BUTTON:
+				GameController.SetMode(Mode.Handicapped);
+				break;
+		}
+
 		GameController.EndCurrentState();
 	}
 

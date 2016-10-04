@@ -34,6 +34,11 @@ public enum GameState
 	AlteringSettings,
 
 	/// <summary>
+	/// The player is altering the game mode
+	/// </summary>
+	AlteringMode,
+
+	/// <summary>
 	/// Players are deploying their ships
 	/// </summary>
 	Deploying,
