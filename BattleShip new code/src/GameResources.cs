@@ -47,7 +47,7 @@ public static class GameResources
 
 	private static void LoadSounds()
 	{
-		NewSound("Error", "error.wav");
+		NewSound("Error", "error.mp3");
 		NewSound("Hit", "hit.wav");
 		NewSound("Sink", "sink.wav");
 		NewSound("Siren", "siren.wav");
@@ -58,7 +58,7 @@ public static class GameResources
 
 	private static void LoadMusic()
 	{
-		NewMusic("Background", "horrordrone.mp3");
+		NewMusic("Background", "horrordrone_new.mp3");
 	}
 
 	/// <summary>
