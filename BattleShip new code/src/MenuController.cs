@@ -138,6 +138,10 @@ static class MenuController
 	private static bool HandleMenuInput(int menu, int level, int xOffset)
 	{
 		if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE)) {
+			if (GameController.CurrentState == GameState.ViewingGameMenu && GameController.GameMode == Mode.Timed)
+			{
+				DiscoveryController.ResumeTimer();
+			}
 			GameController.EndCurrentState();
 			return true;
 		}
@@ -365,6 +369,9 @@ static class MenuController
 		switch (button) {
 			case GAME_MENU_RETURN_BUTTON:
 				GameController.EndCurrentState();
+				if (GameController.GameMode == Mode.Timed) {
+					DiscoveryController.ResumeTimer();
+				}
 				break;
 			case GAME_MENU_SURRENDER_BUTTON:
 				GameController.EndCurrentState();

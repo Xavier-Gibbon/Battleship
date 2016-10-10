@@ -12,6 +12,32 @@ using SwinGameSDK;
 /// </summary>
 static class DiscoveryController
 {
+	private static Timer _gameTimer = new Timer();
+
+	public static uint TimerAt
+	{ get {return _gameTimer.Ticks;} }
+
+	public static void StartTimer()
+	{
+		_gameTimer.Reset();
+		_gameTimer.Start();
+	}
+
+	public static void StopTimer()
+	{
+		_gameTimer.Stop();
+	}
+
+	public static void PauseTimer()
+	{
+		_gameTimer.Pause();
+	}
+
+	public static void ResumeTimer()
+	{
+		_gameTimer.Resume();
+	}
+
 
 	/// <summary>
 	/// Handles input during the discovery phase of the game.
@@ -24,10 +50,20 @@ static class DiscoveryController
 	{
 		if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE)) {
 			GameController.AddNewState(GameState.ViewingGameMenu);
-		}
-
-		if (SwinGame.MouseClicked(MouseButton.LeftButton)) {
+			if (GameController.GameMode == Mode.Timed) {
+				_gameTimer.Pause();
+			}
+		} else if (SwinGame.MouseClicked(MouseButton.LeftButton)) {
 			DoAttack();
+		} else if (GameController.GameMode == Mode.Timed) {
+			CheckTime();
+		}
+	}
+
+	private static void CheckTime()
+	{
+		if (TimerAt >= 180000) {
+			GameController.SwitchState(GameState.EndingGame);
 		}
 	}
 
@@ -75,6 +111,35 @@ static class DiscoveryController
 		SwinGame.DrawText(GameController.HumanPlayer.Shots.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
 		SwinGame.DrawText(GameController.HumanPlayer.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
 		SwinGame.DrawText(GameController.HumanPlayer.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
+
+		if (GameController.GameMode == Mode.Timed) {
+			DrawTime();
+		}
+	}
+
+	public static void DrawTime()
+	{
+		int minutes = 3;
+			int seconds = 0;
+			uint milliseconds = TimerAt;
+			while (milliseconds >= 1000) {
+				milliseconds -= 1000;
+				seconds -= 1;
+				if (seconds < 0) {
+					seconds += 60;
+					minutes -= 1;
+				}
+			}
+			string secondsText;
+			if (seconds < 10) {
+				secondsText = "0" + seconds;
+			} else {
+				secondsText = seconds.ToString();
+			}
+
+			string timeLeft = minutes + " : " + secondsText;
+
+			SwinGame.DrawText(timeLeft, Color.White, GameResources.GameFont("Menu"), 735, 100);
 	}
 
 }

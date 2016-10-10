@@ -52,6 +52,15 @@ public static class GameController
 		get { return _ai; }
 	}
 
+	/// <summary>
+	/// Returns the game mode
+	/// </summary>
+	/// <value>the gamemode</value>
+	/// <returns>the gamemode</returns>
+	public static Mode GameMode {
+		get { return _gameMode; }
+	}
+
 	static GameController()
 	{
 		//bottom state will be quitting. If player exits main menu then the game is over
@@ -212,6 +221,10 @@ public static class GameController
 		_theGame.AddDeployedPlayer(_human);
 		_theGame.AddDeployedPlayer(_ai);
 
+		if (_gameMode == Mode.Timed) {
+			DiscoveryController.StartTimer();
+		}
+
 		SwitchState(GameState.Discovering);
 	}
 
@@ -254,12 +267,18 @@ public static class GameController
 	private static void CheckAttackResult(AttackResult result)
 	{
 		switch (result.Value) {
+			
 			case ResultOfAttack.Miss:
-				if (object.ReferenceEquals(_theGame.Player, ComputerPlayer))
+				if (object.ReferenceEquals(_theGame.Player, ComputerPlayer)) {
+					DiscoveryController.PauseTimer();
 					AIAttack();
+				} else {
+					DiscoveryController.ResumeTimer();
+				}
 				break;
 			case ResultOfAttack.GameOver:
 				SwitchState(GameState.EndingGame);
+				DiscoveryController.StopTimer();
 				break;
 		}
 	}
